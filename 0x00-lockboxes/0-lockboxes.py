@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+'''Holberton interview prep - 0x00 task 0 lockboxes'''
 
 
 def canUnlockAll(boxes):
+    '''Determines if all boxes can be opened using keys'''
     if boxes is None or type(boxes) is not list:
         return False
     if len(boxes) <= 1:
