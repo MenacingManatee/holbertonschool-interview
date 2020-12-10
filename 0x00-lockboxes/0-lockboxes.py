@@ -13,8 +13,8 @@ def canUnlockAll(boxes):
             keys.extend(boxes[item])
         keys = list(set(keys))
         i2 = len(keys)
-    bx = boxes.copy()
-    bx.pop(0)
-    if len(keys) >= len(bx):
-        return True
-    return False
+    tmp = True
+    for i in range(len(boxes)):
+        if (i != 0 and i not in keys):
+            tmp = False
+    return tmp
