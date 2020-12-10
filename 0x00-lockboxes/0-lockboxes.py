@@ -11,7 +11,7 @@ def canUnlockAll(boxes):
     keys = boxes[0].copy()
     i = 0
     i2 = 1  # instantiating them with a value to ignore first loop
-    while i < i2:
+    while len(keys) <= len(boxes) and i < i2:
         i = len(keys)
         keys2 = keys.copy()
         for item in keys2:
