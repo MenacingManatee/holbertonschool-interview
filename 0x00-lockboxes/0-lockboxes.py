@@ -2,7 +2,9 @@
 
 
 def canUnlockAll(boxes):
-    if boxes is None or len(boxes) <= 1:
+    if boxes is None or type(boxes) is not list:
+        return False
+    if len(boxes) <= 1:
         return True
     keys = boxes[0].copy()
     i = 0
