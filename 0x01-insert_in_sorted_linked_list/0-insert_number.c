@@ -23,9 +23,9 @@ listint_t *insert_node(listint_t **head, int number)
         *head = new;
         return (new);
     }
-    if (curr->n >= number)
+    if ((*head)->n >= number)
     {
-        new->next = curr;
+        new->next = *head;
         *head = new;
         return (new);
     }
