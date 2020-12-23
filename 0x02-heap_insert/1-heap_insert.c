@@ -9,6 +9,7 @@
 void heapify(heap_t **root)
 {
 	heap_t *left, *right, *right2;
+
 	if (*root == NULL)
 		return;
 	heapify(&(*root)->left);
@@ -28,7 +29,12 @@ void heapify(heap_t **root)
 		(*root)->parent->right = (*root)->parent;
 	}
 }
-
+/**
+ * find_open_node - finds the leftmost open node
+ * @root: root node
+ *
+ * Return: Leftmost open node, or NULL
+ */
 heap_t *find_open_node(heap_t *root)
 {
 	heap_t *tmp, *res;
