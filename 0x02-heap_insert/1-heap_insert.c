@@ -79,7 +79,7 @@ heap_t *find_open_node(heap_t *root, int level)
 			return (right);
 		else if (!right->left && left->right)
 			return (right);
-		else
+		else if (left && right)
 		{
 			if (get_depth(root, 0) == get_depth(root, 1))
 				return (left);
