@@ -12,15 +12,10 @@ int get_depth(heap_t *root, int side)
 {
 	int count = 0;
 
-	if (side == 0)
+	if (side == 0 || side == 1)
 	{
-		for (; root->left != NULL; count++)
-			root = root->left;
-	}
-	else
-	{
-		for (; root->right != NULL; count++)
-			root = root->right;
+		for (; root->parent != NULL; count++)
+			root = root->parent;
 	}
 	return (count);
 }
@@ -81,7 +76,7 @@ heap_t *find_open_node(heap_t *root, int level)
 			return (right);
 		else if (left && right)
 		{
-			if (get_depth(root, 0) == get_depth(root, 1))
+			if (get_depth(left, 0) <= get_depth(right, 1))
 				return (left);
 			return (right);
 		}
