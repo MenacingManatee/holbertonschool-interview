@@ -43,9 +43,7 @@ heap_t *find_open_node(heap_t *root, int level)
 
 	if (root == NULL)
 		return (NULL);
-	if (level == 1)
-		return (root);
-	else
+	if (level > 1)
 	{
 		left = find_open_node(root->left, level - 1);
 		right = find_open_node(root->right, level - 1);
@@ -58,6 +56,7 @@ heap_t *find_open_node(heap_t *root, int level)
 		else
 			return (left);
 	}
+	return (root);
 }
 /**
  * heap_insert - inserts a node into a binary heap
