@@ -8,7 +8,8 @@
  */
 void heapify(heap_t **root)
 {
-	heap_t *left, *right, *right2;
+	int tmp;
+	heap_t *to_swap = NULL;
 
 	if (*root == NULL)
 		return;
@@ -16,38 +17,47 @@ void heapify(heap_t **root)
 	heapify(&(*root)->right);
 	if ((*root)->left && (*root)->left->n > (*root)->n)
 	{
-		right = (*root)->right;
-		right2 = (*root)->left->right;
-		(*root)->right = right2;
-		(*root)->left->right = right;
-		(*root)->left->parent = (*root)->parent;
-		(*root)->parent = (*root)->left;
-		left = (*root)->left->left;
-		(*root)->parent->left = *root;
-		(*root)->left = left;
-		(*root)->right->parent = (*root);
-		(*root)->parent->right = (*root)->parent;
+		to_swap = (*root)->left;
+	}
+	else if ((*root)->right && (*root)->right->n > (*root)->n)
+	{
+		to_swap = (*root)->right;
+	}
+	if (to_swap)
+	{
+		tmp = to_swap->n;
+		to_swap->n = (*root)->n;
+		(*root)->n = tmp;
 	}
 }
 /**
  * find_open_node - finds the leftmost open node
  * @root: root node
+ * @level: Level currently on
  *
  * Return: Leftmost open node, or NULL
  */
-heap_t *find_open_node(heap_t *root)
+heap_t *find_open_node(heap_t *root, int level)
 {
-	heap_t *tmp, *res;
+	heap_t *left, *right;
 
-	tmp = root;
-	if (tmp == NULL)
+	if (root == NULL)
 		return (NULL);
-	if (tmp->left && !tmp->right)
-		return (tmp);
-	res = find_open_node(tmp->left);
-	if (!res)
-		return (res);
-	return (find_open_node(tmp->right));
+	if (level == 1)
+		return (root);
+	else
+	{
+		left = find_open_node(root->left, level - 1);
+		right = find_open_node(root->right, level - 1);
+		if (left->left && !left->right)
+			return (left);
+		else if (right->left && !right->right)
+			return (right);
+		else if (!right->left && left->right)
+			return (right);
+		else
+			return (left);
+	}
 }
 /**
  * heap_insert - inserts a node into a binary heap
@@ -59,6 +69,7 @@ heap_t *find_open_node(heap_t *root)
 heap_t *heap_insert(heap_t **root, int value)
 {
 	heap_t *new, *tmp;
+	int depth = 0;
 
 	if (root == NULL)
 		return (NULL);
@@ -71,9 +82,20 @@ heap_t *heap_insert(heap_t **root, int value)
 		*root = new;
 		return (new);
 	}
-	tmp = find_open_node(*root);
+	/*printf("Find node\n");*/
+	for (depth = 0, tmp = *root; tmp; depth++)
+		tmp = tmp->left;
+	tmp = find_open_node(*root, depth);
+	/*printf("Node found: %d\n", tmp->n);*/
 	if (!tmp)
 		tmp->right = new;
+	new->parent = tmp;
+	if (tmp->left)
+		tmp->right = new;
+	else
+		tmp->left = new;
 	heapify(root);
+	while (new && new->n != value)
+		new = new->parent;
 	return (new);
 }
