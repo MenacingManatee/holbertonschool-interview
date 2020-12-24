@@ -2,6 +2,30 @@
 #include "binary_trees.h"
 
 /**
+ * get_depth - gets the depth of a binary tree
+ * @root: Root node
+ * @side: 0 for left, 1 for right
+ *
+ * Return: Depth
+ */
+int get_depth(heap_t *root, int side)
+{
+	int count = 0;
+
+	if (side == 0)
+	{
+		for (; root->left != NULL; count++)
+			root = root->left;
+	}
+	else
+	{
+		for (; root->right != NULL; count++)
+			root = root->right;
+	}
+	return (count);
+}
+
+/**
  * heapify - rebalances a binary heap
  * @root: Root node of heap
  *
@@ -47,14 +71,20 @@ heap_t *find_open_node(heap_t *root, int level)
 	{
 		left = find_open_node(root->left, level - 1);
 		right = find_open_node(root->right, level - 1);
-		if (left->left && !left->right)
+		if (!left || !right)
+			return (root);
+		else if (left->left && !left->right)
 			return (left);
 		else if (right->left && !right->right)
 			return (right);
 		else if (!right->left && left->right)
 			return (right);
 		else
-			return (left);
+		{
+			if (get_depth(root, 0) == get_depth(root, 1))
+				return (left);
+			return (right);
+		}
 	}
 	return (root);
 }
@@ -67,34 +97,31 @@ heap_t *find_open_node(heap_t *root, int level)
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-	heap_t *new, *tmp;
+	heap_t *tmp, *new;
 	int depth = 0;
 
 	if (root == NULL)
 		return (NULL);
-	new = malloc(sizeof(heap_t));
-	if (new == NULL)
-		return (NULL);
-	new->n = value;
 	if (*root == NULL)
 	{
-		*root = new;
-		return (new);
+		*root = binary_tree_node(*root, value);
+		return (*root);
 	}
-	/*printf("Find node\n");*/
 	for (depth = 0, tmp = *root; tmp; depth++)
 		tmp = tmp->left;
 	tmp = find_open_node(*root, depth);
-	/*printf("Node found: %d\n", tmp->n);*/
-	if (!tmp)
-		tmp->right = new;
-	new->parent = tmp;
 	if (tmp->left)
-		tmp->right = new;
+	{
+		tmp->right = binary_tree_node(tmp, value);
+		new = tmp->right;
+	}
 	else
-		tmp->left = new;
+	{
+		tmp->left = binary_tree_node(tmp, value);
+		new = tmp->left;
+	}
 	heapify(root);
-	while (new && new->n != value)
+	while (new->parent && new->n != value)
 		new = new->parent;
 	return (new);
 }
