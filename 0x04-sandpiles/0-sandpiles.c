@@ -10,32 +10,33 @@
  */
 void sandify(int grid[3][3])
 {
-    int i, j, topple;
+    int i, topple;
+    int ord_i[9] = {1, 0, 2, 1, 1, 0, 0, 2, 2};
+    int ord_j[9] = {1, 1, 1, 0, 2, 0, 2, 0, 2};
 
-    for (i = 0, topple = 0; i < 3; i++)
+    for (i = 0, topple = 0; i < 9; i++)
     {
-        for (j = 0; j < 3; j++)
-        {
-            if (grid[i][j] > 3)
-            {
-                topple = 1;
-                grid[i][j] -= 4;
-                if (i != 0)
-                    grid[i - 1][j] += 1;
-                if (i != 2)
-                    grid[i + 1][j] += 1;
-                if (j != 0)
-                    grid[i][j - 1] += 1;
-                if (j != 2)
-                    grid[i][j + 1] += 1;
+	    if (grid[ord_i[i]][ord_j[i]] > 3)
+	    {
+		    if (topple == 0)
+		    {
+			    printf("=\n");
+			    print_grid(grid);
+		    }
+		    topple = 1;
+		    grid[ord_i[i]][ord_j[i]] -= 4;
+		    if (ord_i[i] != 0)
+			    grid[ord_i[i] - 1][ord_j[i]] += 1;
+		    if (ord_i[i] != 2)
+			    grid[ord_i[i] + 1][ord_j[i]] += 1;
+		    if (ord_j[i] != 0)
+			    grid[ord_i[i]][ord_j[i] - 1] += 1;
+		    if (ord_j[i] != 2)
+			    grid[ord_i[i]][ord_j[i] + 1] += 1;
             }
-        }
     }
     if (topple == 1)
-    {
-        printf("=\n");
-        print_grid
-    }
+	    sandify(grid);
 }
 /**
  * sandpiles_sum - Adds 2 sandpiles
@@ -50,7 +51,7 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 
     if (grid1 == NULL || grid2 == NULL)
         return;
-    
+
     for (; i < 3; i++)
     {
         for (j = 0; j < 3; j++)
