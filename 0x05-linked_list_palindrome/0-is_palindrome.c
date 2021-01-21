@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
 
 listint_t *find_prev(listint_t *head, listint_t *next);
@@ -9,38 +10,29 @@ listint_t *find_prev(listint_t *head, listint_t *next);
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *last, *first;
+	listint_t *run;
+	int *arr, length = 0, i, j;
 	if (*head == NULL || (*head)->next == NULL)
 		return (1);
-	last = *head;
-	first = *head;
-	while (last->next != NULL)
+	run = *head;
+	while (run->next != NULL)
 	{
-		last = last->next;
+		run = run->next;
+		length++;
 	}
-	while (first != last && first->next != last)
+	arr = malloc(sizeof(int *) * (length));
+	if (arr == NULL)
+		return (0);
+	run = *head;
+	for (i = 0; i <= length && run != NULL; i++)
 	{
-		if (first->n != last->n)
+		arr[i] = run->n;
+		run = run->next;
+	}
+	for (i = 0, j = length; i < j; i++, j--)
+	{
+		if (arr[i] != arr[j])
 			return (0);
-		first = first->next;
-		last = find_prev(*head, last);
 	}
-	if (first == last || first->n == last->n)
-		return (1);
-	return (0);
-}
-/**
- * find_prev - Finds the previous node
- * @head: Pointer to the head node
- * @next: Node to find the previous of
- *
- * Return: Previous node, or NULL
- */
-listint_t *find_prev(listint_t *head, listint_t *next)
-{
-	if (head == NULL) /* Shouldn't happen, jic */
-		return (NULL);
-	if (head->next == next)
-		return (head);
-	return (find_prev(head->next, next));
+	return (1);
 }
