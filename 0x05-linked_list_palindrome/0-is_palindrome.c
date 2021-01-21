@@ -38,11 +38,9 @@ int is_palindrome(listint_t **head)
  */
 listint_t *find_prev(listint_t *head, listint_t *next)
 {
-	while (head != NULL)
-	{
-		if (head->next == next)
-			return (head);
-		head = head->next;
-	}
-	return (NULL);
+	if (head == NULL) /* Shouldn't happen, jic */
+		return (NULL);
+	if (head->next == next)
+		return (head);
+	return (find_prev(head->next, next));
 }
