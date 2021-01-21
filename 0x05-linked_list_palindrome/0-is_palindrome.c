@@ -32,7 +32,11 @@ int is_palindrome(listint_t **head)
 	for (i = 0, j = length; i < j; i++, j--)
 	{
 		if (arr[i] != arr[j])
+		{
+			free(arr);
 			return (0);
+		}
 	}
+	free(arr);
 	return (1);
 }
