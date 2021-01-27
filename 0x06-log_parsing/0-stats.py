@@ -1,15 +1,12 @@
 #!/usr/bin/python3
-'''Log parser tool'''
-
 
 import sys
 
-
 def stats(inp, count, size, dic={}):
     '''Parses logs sent to file'''
-    data = inp.split()
+    data = inp.split( )
     size += int(data[8])
-    if dic.get(data[7]) is None:
+    if dic.get(data[7]) == None:
         dic.update({data[7]: 1})
     else:
         dic.update({data[7]: dic.get(data[7]) + 1})
@@ -30,15 +27,12 @@ def printData(size, data):
 count = 0
 size = 0
 data = {}
-e = True
 try:
     for line in sys.stdin:
         size, data = stats(line, count, size, data)
         count += 1
-    e = False
     sys.stdout.flush()
 finally:
-    if e and count % 10 != 9:
-        printData(size, data)
+    printData(size, data)
     sys.stdout.flush()
 exit(0)
