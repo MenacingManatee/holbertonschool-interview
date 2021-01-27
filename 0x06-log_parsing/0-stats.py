@@ -1,12 +1,15 @@
 #!/usr/bin/python3
+'''Log parsing tool'''
+
 
 import sys
 
+
 def stats(inp, count, size, dic={}):
     '''Parses logs sent to file'''
-    data = inp.split( )
+    data = inp.split()
     size += int(data[8])
-    if dic.get(data[7]) == None:
+    if dic.get(data[7]) is None:
         dic.update({data[7]: 1})
     else:
         dic.update({data[7]: dic.get(data[7]) + 1})
