@@ -30,10 +30,12 @@ def printData(size, data):
 count = 0
 size = 0
 data = {}
+e = True
 try:
     for line in sys.stdin:
         size, data = stats(line, count, size, data)
         count += 1
+    e = False
     sys.stdout.flush()
 finally:
     printData(size, data)
