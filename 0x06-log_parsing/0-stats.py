@@ -40,6 +40,6 @@ try:
 finally:
     if e and i % 10 != 9:
         printData(size, data)
-    sys.stdout.flush()
+        raise
 printData(size, data)
 exit(0)
