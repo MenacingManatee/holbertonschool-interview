@@ -38,6 +38,7 @@ try:
     e = False
     sys.stdout.flush()
 finally:
-    printData(size, data)
+    if e:
+        printData(size, data)
     sys.stdout.flush()
 exit(0)
