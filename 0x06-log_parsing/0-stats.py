@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 '''Log parser tool'''
+
+
 import sys
 
 
