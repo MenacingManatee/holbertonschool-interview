@@ -40,5 +40,6 @@ try:
 finally:
     if e and count % 10 != 9:
         printData(size, data)
+    raise
 printData(size, data)
 exit(0)
