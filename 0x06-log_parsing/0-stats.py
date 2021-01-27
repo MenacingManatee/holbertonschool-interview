@@ -38,8 +38,7 @@ try:
     e = False
     sys.stdout.flush()
 finally:
-    if e and i % 10 != 9:
+    if e and count % 10 != 9:
         printData(size, data)
-        raise
 printData(size, data)
 exit(0)
