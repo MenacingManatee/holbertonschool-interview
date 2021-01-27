@@ -36,6 +36,6 @@ try:
         count += 1
     sys.stdout.flush()
 finally:
-    printData(size, data)
+    # printData(size, data)
     sys.stdout.flush()
 exit(0)
