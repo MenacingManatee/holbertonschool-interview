@@ -10,7 +10,7 @@ def stats(inp, count, size, dic={}):
     data = inp.split()
     size += int(data[8])
     if dic.get(data[7]) is None:
-        dic.update({data[7]: 1})
+        return size, dic
     else:
         dic.update({data[7]: dic.get(data[7]) + 1})
     if count % 10 == 9:
@@ -24,12 +24,13 @@ def printData(size, data):
     tmp = list(data.keys())
     tmp.sort()
     for item in tmp:
-        print("{}: {}".format(item, data.get(item)))
+        if data.get(item) != 0:
+            print("{}: {}".format(item, data.get(item)))
 
 
 count = 0
 size = 0
-data = {}
+data = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
 e = True
 try:
     for line in sys.stdin:
@@ -38,8 +39,5 @@ try:
     e = False
     sys.stdout.flush()
 finally:
-    if e and count % 10 != 9:
-        printData(size, data)
-    raise
-printData(size, data)
+    printData(size, data)
 exit(0)
