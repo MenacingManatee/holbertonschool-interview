@@ -3,6 +3,7 @@
 Module for validating utf-8 encoding
 """
 
+
 def validUTF8(data):
     '''Return: True if data is a valid UTF-8 encoding, else return False'''
     binary = []
@@ -31,9 +32,11 @@ def validUTF8(data):
                 return False
     return True
 
-    
+
 def int_to_binary(data):
-    '''Converts an int less than 256 to a string representation of its binary'''
+    '''
+    Converts an int less than 256 to a string representation of its binary
+    '''
     bina = []
     for i in range(0, 8):
         bina.append(str(data % 2))
