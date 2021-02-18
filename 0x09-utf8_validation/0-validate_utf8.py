@@ -23,6 +23,8 @@ def validUTF8(data):
                     break
             count -= 1
             if count > 0:
+                if count > 3:
+                    return False
                 flag = 1
         else:
             if item[:2] == "10":
