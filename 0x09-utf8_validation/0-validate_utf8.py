@@ -10,6 +10,8 @@ def validUTF8(data):
     flag = 0
     count = 0
     for item in data:
+        if type(item) is not int:
+            return False
         binary.append(int_to_binary(item))
     for item in binary:
         if count <= 0:
