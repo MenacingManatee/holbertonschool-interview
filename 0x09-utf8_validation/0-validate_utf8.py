@@ -9,6 +9,8 @@ def validUTF8(data):
     binary = []
     flag = 0
     count = 0
+    if type(data) is not list:
+        return False
     for item in data:
         if type(item) is not int:
             return False
