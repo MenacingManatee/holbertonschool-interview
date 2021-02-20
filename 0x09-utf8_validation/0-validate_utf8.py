@@ -38,6 +38,8 @@ def validUTF8(data):
                 continue
             else:
                 return False
+    if count > 0:
+        return False
     return True
 
 
