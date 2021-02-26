@@ -36,7 +36,7 @@ void merge_nums(int *line, size_t size, int direction)
 	{
 		for (i = j = catch = 1; i < (int)size; i++, j = i)
 		{
-			while (j != 1 && line[j - 1] == 0 && line[j] != 0)
+			while (j >= 1 && line[j - 1] == 0 && line[j] != 0)
 			{
 				line[j - 1] += line[j];
 				line[j] = 0;
@@ -54,7 +54,7 @@ void merge_nums(int *line, size_t size, int direction)
 	{
 		for (i = j = catch = size - 2; i >= 0; i--, j = i)
 		{
-			while (j != (int)size - 2 && line[j + 1] == 0 && line[j] != 0)
+			while (j <= (int)size - 2 && line[j + 1] == 0 && line[j] != 0)
 			{
 				line[j + 1] += line[j];
 				line[j] = 0;
