@@ -11,6 +11,7 @@ void menger(int level)
 {
 	int i, j, cols = pow(3, level - 1);
 	int count = 1;
+
 	if (level == 0)
 		printf("#\n");
 	for (i = 0; i < cols * 3; i++)
