@@ -2,8 +2,10 @@
 
 
 import sys
+import json
 
 
+lmnop = 1
 def attackCheck(currSol):
     ''' '''
     if len(currSol) <= 1:
@@ -31,11 +33,11 @@ def solver(currSol, n, col, start):
 
     for i in range(n):
         if not attackCheck(currSol):
-            currSol.append(list([col, i]))
+            currSol.append(list([i, col]))
             if solver(currSol, n, col + 1, 0)[0] is True:
                 return True, currSol
             else:
-                currSol.remove([col, i])
+                currSol.remove([i, col])
     return False, currSol
 
 
@@ -52,7 +54,7 @@ elif int(sys.argv[1]) < 4:
 start = 0
 solutions = []
 solution = solver([], int(sys.argv[1]), 0, start)
-while solution[0] is True:
+while solution[0] is True and solution[1] != []:
     solutions.append(solution[1].copy())
     start += 1
     solution = solver([], int(sys.argv[1]), 0, start)
