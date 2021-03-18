@@ -15,10 +15,8 @@ def attackCheck(currSol):
             if item1 is item2:
                 continue
             if (item2[1] == item1[1] or item2[0] == item1[0]):
-                #print("straight", currSol)
                 res = True
             elif item1[0] - item2[0] == item1[1] - item2[1]:
-                #print("diagonal", currSol, item1[0], item1[1], item2[0], item2[1])
                 res = True
     return res
 
@@ -34,7 +32,7 @@ def solver(currSol, n, col, start):
     for i in range(n):
         if not attackCheck(currSol):
             currSol.append(list([col, i]))
-            if solver(currSol, n, col + 1, 0)[0] == True:
+            if solver(currSol, n, col + 1, 0)[0] is True:
                 return True, currSol
             else:
                 currSol.remove([col, i])
@@ -54,8 +52,7 @@ elif int(sys.argv[1]) < 4:
 start = 0
 solutions = []
 solution = solver([], int(sys.argv[1]), 0, start)
-#print(solution)
-while solution[0] == True:
+while solution[0] is True:
     solutions.append(solution[1].copy())
     start += 1
     solution = solver([], int(sys.argv[1]), 0, start)
