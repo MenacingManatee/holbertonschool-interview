@@ -56,12 +56,12 @@ elif not sys.argv[1].isnumeric():
 elif int(sys.argv[1]) < 4:
     print("N must be at least 4")
     exit(1)
-start = 1
+start = 0
 solutions = []
 solution = solver([], int(sys.argv[1]), 0, start)
 while solution[0] is True and solution[1] != []:
     solutions.append(solution[1].copy())
-    start += 1
+    start = solution[1][0][1] + 1
     solution = solver([], int(sys.argv[1]), 0, start)
 for item in solutions:
     if len(item) == int(sys.argv[1]):
