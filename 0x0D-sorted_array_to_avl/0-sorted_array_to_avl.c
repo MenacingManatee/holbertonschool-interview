@@ -15,7 +15,7 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 {
 	avl_t *root;
 
-	root = fill_nodes(0, size, NULL, array);
+	root = fill_nodes(0, size - 1, NULL, array);
 	return (root);
 }
 /**
@@ -51,11 +51,13 @@ avl_t *fill_nodes(size_t start, size_t end, avl_t *node, int *array)
 	avl_t *new;
 	int i = (start + end) / 2;
 
-	if (start >= end || i <= (int)start || i > (int)end)
+	if (start > end || i < (int)start)/* || i > (int)end)*/
+	{
 		return (NULL);
-	new = create_node(array[i - 1]);
+	}
+	new = create_node(array[i]);
 	new->parent = node;
-	new->left = fill_nodes(start, i, new, array);
-	new->right = fill_nodes(i, end, new, array);
+	new->left = fill_nodes(start, i - 1, new, array);
+	new->right = fill_nodes(i + 1, end, new, array);
 	return (new);
 }
