@@ -56,6 +56,8 @@ avl_t *fill_nodes(size_t start, size_t end, avl_t *node, int *array)
 		return (NULL);
 	}
 	new = create_node(array[i]);
+	if (new == NULL)
+		return (NULL);
 	new->parent = node;
 	new->left = fill_nodes(start, i - 1, new, array);
 	new->right = fill_nodes(i + 1, end, new, array);
