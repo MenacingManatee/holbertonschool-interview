@@ -22,6 +22,8 @@ def run(walls, index):
     ''' Runs ahead to help calculate reserved water '''
     for i in range(index + 1, len(walls)):
         if (walls[i] >= walls[index]):
+            if (index == 0 and i == len(walls) - 1):
+                return ((i - index) * walls[index], i)
             return ((i - index) - 1) * walls[index], i
     if (index + 1 == len(walls)):
         return (0, index)
