@@ -5,6 +5,7 @@ Usage: rain(walls)
 Walls is a list of non-negative integers
 '''
 
+
 def rain(walls):
     ''' Return: (int) Total amount of rainwater retained'''
     if len(walls) == 0:
