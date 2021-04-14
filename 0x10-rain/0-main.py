@@ -13,4 +13,4 @@ if __name__ == "__main__":
 
 
     walls = [3, 2, 1, 2, 3]
-    print("{0} == {1}".format(rain(walls), 12))
+    print("{0} == {1}".format(rain(walls), 4))
