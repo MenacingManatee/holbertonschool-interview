@@ -8,7 +8,7 @@ Walls is a list of non-negative integers
 
 def rain(walls):
     ''' Return: (int) Total amount of rainwater retained'''
-    if len(walls) == 0:
+    if len(walls) <= 2:
         return (0)
     saved = 0
     i = 0
