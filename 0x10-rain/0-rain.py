@@ -33,14 +33,13 @@ def run(walls, index):
     if (index + 1 == len(walls)):
         return (index, 0)
     else:
-        return (index + 1, min(walls[index - 1],
-                               walls[index + 1]) - walls[index])
+        return (m_i, basin_size(walls, index, m_i))
 
 
 def basin_size(walls, i1, i2):
     ''' Calculates the size of a large basin '''
     saved = 0
     size = min(walls[i1], walls[i2])
-    for i in range(i1, i2):
+    for i in range(i1 + 1, i2):
         saved += size - walls[i]
     return saved
