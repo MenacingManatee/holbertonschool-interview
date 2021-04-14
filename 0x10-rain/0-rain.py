@@ -33,7 +33,8 @@ def run(walls, index):
     if (index + 1 == len(walls)):
         return (index, 0)
     else:
-        return (index + 1, min(walls[index - 1], walls[index + 1]) - walls[index])
+        return (index + 1, min(walls[index - 1],
+                               walls[index + 1]) - walls[index])
 
 
 def basin_size(walls, i1, i2):
