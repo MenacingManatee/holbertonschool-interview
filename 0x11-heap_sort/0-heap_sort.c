@@ -14,18 +14,21 @@ void heap_sort(int *array, size_t size)
 	int i, tmp;
 
 	heapify(array, size, ((size - 2) / 2) - 1);
-	for (i = size -1; i > 0; i--)
+	for (i = size - 1; i > 0; i--)
 	{
 		tmp = array[0];
 		array[0] = array[i];
 		array[i] = tmp;
 		print_array(array, size);
 		if (i >= 1)
-		  sift_down(array, 0, i, size);
+			sift_down(array, 0, i, size);
 	}
 }
 /**
- *
+ * heapify - Represents the array as a binary heap
+ * @array: Array to heapify
+ * @size: Size of array
+ * @i: starting node of heap
  */
 void heapify(int *array, size_t size, int i)
 {
@@ -54,7 +57,11 @@ void heapify(int *array, size_t size, int i)
 
 }
 /**
- *
+ * sift_down - Uses the sift down method to pre-sort heap
+ * @array: Array to sift
+ * @start: Node to start on
+ * @end: Boundary of sorted zone
+ * @size: Size of array
  */
 void sift_down(int *array, int start, int end, size_t size)
 {
