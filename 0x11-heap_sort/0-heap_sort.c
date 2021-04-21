@@ -13,6 +13,21 @@ void heap_sort(int *array, size_t size)
 {
 	int i, tmp;
 
+	if (size <= 1)
+		return;
+	else if (size == 2)
+	{
+		if (array[0] < array[1])
+			return;
+		else
+		{
+			tmp = array[0];
+			array[0] = array[1];
+			array[1] = tmp;
+			print_array(array, size);
+			return;
+		}
+	}
 	heapify(array, size, ((size - 2) / 2) - 1);
 	for (i = size - 1; i > 0; i--)
 	{
