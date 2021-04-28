@@ -26,12 +26,22 @@ int advanced_binary(int *array, size_t size, int value)
 {
 	int num = size / 2;
 	int odd = size % 2 == 0 ? 0 : 1;
+	int tmp = -1;
 
 	if (array == NULL || size <= 0)
 		return (-1);
 	print_array(array, size);
 	if (array[num] == value)
-		return (num);
+	{
+		if (size > 2)
+		{
+			tmp = advanced_binary(array, size / 2, value);
+		}
+		else if (size == 2)
+			if (array[0] == value)
+				return (0);
+		return ((tmp == -1 ? num : tmp));
+	}
 	else if (array[num] > value)
 		return (advanced_binary(array, size / 2, value));
 	else {
