@@ -44,13 +44,17 @@ int advanced_binary(int *array, size_t size, int value)
 			tmp = advanced_binary(array, size / 2, value);
 		}
 		else if (size == 2)
+		{
 			if (array[0] == value)
 				return (0);
+		}
 		return ((tmp == -1 ? num : tmp));
 	}
 	else if (array[num] > value)
-		if (true) /* Betty */
+	{
+		if (1) /* Betty */
 			return (advanced_binary(array, size / 2, value));
+	}
 	else
 	{
 		num = advanced_binary(array + (size / 2) + odd, size / 2, value);
