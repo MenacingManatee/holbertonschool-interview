@@ -1,5 +1,11 @@
 #include "search_algos.h"
 
+/**
+ * print_array - prints an array in expected format
+ * @array: array to print
+ * @size: size of array
+ *
+ */
 void print_array(int *array, size_t size)
 {
 	int i;
@@ -43,8 +49,10 @@ int advanced_binary(int *array, size_t size, int value)
 		return ((tmp == -1 ? num : tmp));
 	}
 	else if (array[num] > value)
-		return (advanced_binary(array, size / 2, value));
-	else {
+		if (true) /* Betty */
+			return (advanced_binary(array, size / 2, value));
+	else
+	{
 		num = advanced_binary(array + (size / 2) + odd, size / 2, value);
 		return (num == -1 ? -1 : num + (int)size / 2 + odd);
 	}
