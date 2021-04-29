@@ -19,7 +19,9 @@ int main(void)
 
     printf("Found %d at index: %d\n\n", 8, advanced_binary(array, size, 8));
     printf("Found %d at index: %d\n\n", 5, advanced_binary(array, size, 5));
-    printf("Found %d at index: %d\n", 999, advanced_binary(array, size, 999));
-	printf("Found %d at index: %d\n", 0, advanced_binary(array2, 6, 1));
+    printf("Found %d at index: %d\n\n", 999, advanced_binary(array, size, 999));
+	printf("Found %d at index: %d\n\n", 1, advanced_binary(array2, 6, 1));
+	printf("Found %d at index: %d\n", 0, advanced_binary(NULL, 10, 0));
+	printf("Found %d at index: %d\n", 0, advanced_binary(array, 0, 0));
     return (EXIT_SUCCESS);
 }

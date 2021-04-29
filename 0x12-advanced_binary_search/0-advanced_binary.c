@@ -30,7 +30,7 @@ void print_array(int *array, size_t size)
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-	int num = size / 2;
+	int num = (size / 2) - 1;
 	int odd = size % 2 == 0 ? 0 : 1;
 	int tmp = -1;
 
