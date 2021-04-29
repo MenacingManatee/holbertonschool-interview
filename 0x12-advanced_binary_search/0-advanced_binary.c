@@ -39,11 +39,11 @@ int advanced_binary(int *array, size_t size, int value)
 	print_array(array, size);
 	if (array[num] == value)
 	{
-		if (size > 2)
+		if (size > 3)
 		{
 			tmp = advanced_binary(array, size / 2, value);
 		}
-		else if (size == 2)
+		else if (size <= 3)
 		{
 			if (array[0] == value)
 				return (0);
