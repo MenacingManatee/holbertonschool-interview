@@ -34,7 +34,8 @@ def recurse(subreddit, word_list, count_dict={}, after='', multi={}):
         word_list = list(set(word_list_tmp))
         for word in word_list:
             count_dict.update({word: word_count(word, tmp2, multi)})
-        count_dict.update(recurse(subreddit, word_list, count_dict, aft, multi))
+        count_dict.update(recurse(subreddit, word_list,
+                                  count_dict, aft, multi))
         return count_dict
     else:
         data = requests.get(r + '?after={}'.format(after),
@@ -55,7 +56,8 @@ def recurse(subreddit, word_list, count_dict={}, after='', multi={}):
         if (aft is None):
             return count_dict
         else:
-            count_dict.update(recurse(subreddit, word_list, count_dict, aft, multi))
+            count_dict.update(recurse(subreddit,
+                                      word_list, count_dict, aft, multi))
             return count_dict
 
 
