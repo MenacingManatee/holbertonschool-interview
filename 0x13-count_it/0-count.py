@@ -77,7 +77,7 @@ def word_count(word, title_list, multi):
 
 def print_res(res_d):
     ''' Prints a dictionary in descending order '''
-    sorted_keys = sorted(res_d, key=res_d.get, reverse=True)
+    sorted_keys = sorted(res_d, key = lambda x: (-res_d[x], x))
     for key in sorted_keys:
         if res_d.get(key, 0) > 0:
             print(key + ':', res_d.get(key))
