@@ -19,7 +19,7 @@ def recurse(subreddit, word_list, count_dict={}, after='', multi={}):
 
     if len(count_dict) == 0:
         try:
-            data = requests.get(r + '?limit=1',
+            data = requests.get(r,
                                 headers=u_a, allow_redirects=False)
         except Exception as e:
             print(e)
@@ -29,16 +29,17 @@ def recurse(subreddit, word_list, count_dict={}, after='', multi={}):
         jsn = data.json().get('data')
         if jsn is None or jsn.get('children') is None:
             return None
-        tmp = jsn.get('children')[0].get('data').get('title')
+        hot_list = []
+        for item in jsn.get('children'):
+            hot_list.append(item.get('data').get('title'))
         aft = jsn.get('after')
-        tmp2 = [tmp]
         word_list_tmp = [word.lower() for word in word_list]
         for word in word_list:
             if word_list_tmp.count(word.lower()) > 1:
                 multi.update({word.lower(): word_list_tmp.count(word.lower())})
         word_list = list(set(word_list_tmp))
         for word in word_list:
-            count_dict.update({word: word_count(word, tmp2, multi)})
+            count_dict.update({word: word_count(word, hot_list, multi)})
         count_dict.update(recurse(subreddit, word_list,
                                   count_dict, aft, multi))
         return count_dict
