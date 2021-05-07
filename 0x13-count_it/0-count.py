@@ -6,9 +6,7 @@ import requests
 def count_words(subreddit, word_list):
     ''' Queries the reddit API for hot articles '''
     res = recurse(subreddit, word_list)
-    if res is None:
-        print('')
-    else:
+    if res is not None:
         print_res(res)
 
 
@@ -22,7 +20,6 @@ def recurse(subreddit, word_list, count_dict={}, after='', multi={}):
             data = requests.get(r,
                                 headers=u_a, allow_redirects=False)
         except Exception as e:
-            print(e)
             return None
         if data.status_code != 200:
             return None
