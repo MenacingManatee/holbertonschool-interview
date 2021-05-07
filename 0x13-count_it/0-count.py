@@ -19,8 +19,10 @@ def recurse(subreddit, word_list, count_dict={}, after='', multi={}):
 
     if len(count_dict) == 0:
         try:
-            data = requests.get(r + '?limit=1', headers=u_a, allow_redirects=False)
+            data = requests.get(r + '?limit=1',
+                                headers=u_a, allow_redirects=False)
         except Exception as e:
+            print(e)
             return None
         if data.status_code != 200:
             return None
