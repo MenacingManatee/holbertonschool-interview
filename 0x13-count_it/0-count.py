@@ -18,7 +18,10 @@ def recurse(subreddit, word_list, count_dict={}, after='', multi={}):
     u_a = {'User-agent': 'User Agent 1.0'}
 
     if len(count_dict) == 0:
-        data = requests.get(r + '?limit=1', headers=u_a, allow_redirects=False)
+        try:
+            data = requests.get(r + '?limit=1', headers=u_a, allow_redirects=False)
+        except Exception as e:
+            return None
         if data.status_code != 200:
             return None
         jsn = data.json().get('data')
