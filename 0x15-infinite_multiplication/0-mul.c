@@ -81,6 +81,8 @@ char *mul(char *num1, char *num2)
 		for (j = len2 - 1; j >= 0; j--)
 		{
 			n2 = num2[j] - '0';
+			if (res[i_n1 + i_n2] > 9)
+				res[i_n1 + i_n2] -= '0';
 			sum = n1 * n2 + res[i_n1 + i_n2] + carry;
 			carry = sum / 10;
 			res[i_n1 + i_n2] = (sum % 10) + '0';
@@ -98,6 +100,7 @@ char *mul(char *num1, char *num2)
 	fin_res = malloc(sizeof(char) * (i + 1));
 	for(j = 0; i >= 0; i--, j++)
 		fin_res[j] = res[i];
+	free(res);
 	return (fin_res);
 }
 
