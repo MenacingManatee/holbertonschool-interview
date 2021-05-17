@@ -53,16 +53,49 @@ int check_int(char *s)
 }
 
 /**
+ * mul - multiplies 2 numbers represented as strings
+ *
+ * @num1: number 1
+ * @num2: number 2
+ *
+ * Return: multiplied number or NULL on failure
+ */
+char *mul(char *num1, char *num2)
+{
+	int len1 = _strlen(num1);
+	int len2 = _strlen(num2);
+	int i;
+	char *res = malloc(sizeof(char) * (len1 + len2)); /*max length*/
+
+	if (res == NULL)
+		return (NULL);
+	for (i = 0; i < (len1 + len2); i++)
+		res[i] = '0';
+	return (res);
+}
+
+/**
  * main - multiplies 2 numbers of theoretically infinite size
  *
  * Return: Always 0 (ok)
  */
 int main(int argc, char **argv)
 {
+	char *res;
+
 	if (argc != 3 || (!check_int(argv[1]) || !check_int(argv[2])))
 	{
 		print_string("Error\n");
 		return (98);
 	}
+	res = mul(argv[1], argv[2]);
+	if (res == NULL)
+	{
+		print_string("Error\n");
+		return (98);
+	}
+	print_string(res);
+	_putchar('\n');
+	free(res);
 	return (0);
 }
