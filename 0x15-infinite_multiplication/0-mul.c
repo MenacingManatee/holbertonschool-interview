@@ -64,14 +64,41 @@ char *mul(char *num1, char *num2)
 {
 	int len1 = _strlen(num1);
 	int len2 = _strlen(num2);
-	int i;
-	char *res = malloc(sizeof(char) * (len1 + len2)); /*max length*/
+	int i, j, i_n1 = 0, i_n2 = 0;
+	int n1, n2, carry = 0, sum = 0;
+	char *fin_res, *res = malloc(sizeof(char) * (len1 + len2)); /*max length*/
 
 	if (res == NULL)
 		return (NULL);
 	for (i = 0; i < (len1 + len2); i++)
-		res[i] = '0';
-	return (res);
+		res[i] = 0;
+	for (i = len1 - 1; i >= 0; i--)
+	{
+		carry = 0;
+		n1 = num1[i] - '0';
+		i_n2 = 0;
+
+		for (j = len2 - 1; j >= 0; j--)
+		{
+			n2 = num2[j] - '0';
+			sum = n1 * n2 + res[i_n1 + i_n2] + carry;
+			carry = sum / 10;
+			res[i_n1 + i_n2] = (sum % 10) + '0';
+			i_n2++;
+		}
+		if (carry > 0)
+			res[i_n1 + i_n2] += carry;
+		i_n1++;
+	}
+	i = _strlen(res);
+	while (i >= 0 && (res[i] == 0 || res[i] == '0'))
+		i--;
+	if (i == -1)
+		return ("0");
+	fin_res = malloc(sizeof(char) * (i + 1));
+	for(j = 0; i >= 0; i--, j++)
+		fin_res[j] = res[i];
+	return (fin_res);
 }
 
 /**
