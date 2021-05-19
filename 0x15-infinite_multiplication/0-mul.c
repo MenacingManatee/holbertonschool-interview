@@ -2,7 +2,7 @@
 #include "holberton.h"
 
 /**
- * print_string
+ * print_string - prints a string
  * @s: string to print
  *
  * Return: 0 on success, 1 otherwise
@@ -98,7 +98,7 @@ char *mul(char *num1, char *num2)
 	if (i == -1)
 		return ("0");
 	fin_res = malloc(sizeof(char) * (i + 1));
-	for(j = 0; i >= 0; i--, j++)
+	for (j = 0; i >= 0; i--, j++)
 		fin_res[j] = res[i];
 	free(res);
 	return (fin_res);
@@ -106,6 +106,8 @@ char *mul(char *num1, char *num2)
 
 /**
  * main - multiplies 2 numbers of theoretically infinite size
+ * @argc: Argument count
+ * @argv: Argument vector
  *
  * Return: Always 0 (ok)
  */
