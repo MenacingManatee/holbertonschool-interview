@@ -128,6 +128,7 @@ int main(int argc, char **argv)
 	}
 	print_string(res);
 	_putchar('\n');
-	free(res);
+	if (res[0] != '0')
+		free(res);
 	return (0);
 }
