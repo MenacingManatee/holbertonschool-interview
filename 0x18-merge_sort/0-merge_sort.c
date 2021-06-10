@@ -15,6 +15,8 @@ void merge(int *array, int *arr2, int start, int mid, int end)
 	int num1 = mid - start + 1;
 	int num2 = end - mid;
 
+	if (end - start == 0)
+		return;
 	for (i = 0; i < num1; i++)
 		arr2[i] = array[start + i];
 	for (j = i; j - i < num2; j++)
@@ -42,13 +44,11 @@ void merge(int *array, int *arr2, int start, int mid, int end)
 	while (i < num1)
 	{
 		array[k] = arr2[i];
-		i++, k++;
-	}
+		i++, k++; }
 	while (j - i < num2)
 	{
 		array[k] = arr2[j];
-		j++, k++;
-	}
+		j++, k++; }
 	printf("[Done]: ");
 	print_array(array + start, end - start + 1);
 }
@@ -90,6 +90,6 @@ void merge_sort(int *array, size_t size)
 	if (size < 2)
 		return;
 	arr2 = malloc(sizeof(int) * size);
-	split_merge(array, arr2, 0, size);
+	split_merge(array, arr2, 0, size - 1);
 	free(arr2);
 }
