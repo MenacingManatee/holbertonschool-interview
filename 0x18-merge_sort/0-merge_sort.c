@@ -85,8 +85,11 @@ void split_merge(int *array, int *arr2, size_t start, size_t end)
  */
 void merge_sort(int *array, size_t size)
 {
-	int *arr2 = malloc(sizeof(int) * size);
+	int *arr2;
 
+	if (size < 2)
+		return;
+	arr2 = malloc(sizeof(int) * size);
 	split_merge(array, arr2, 0, size);
 	free(arr2);
 }
