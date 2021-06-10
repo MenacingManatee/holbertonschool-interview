@@ -1,7 +1,5 @@
 #include "sort.h"
 
-int *arr_copy(int *array, size_t n1, size_t n2);
-void free_arr(int *array);
 /**
  * merge - merges a split array
  * @array: array to merge into
@@ -11,57 +9,48 @@ void free_arr(int *array);
  * @end: end index
  *
  */
-void merge(int *array, int start, int mid, int end)
+void merge(int *array, int *arr2, int start, int mid, int end)
 {
 	int i, j, k;
 	int num1 = mid - start + 1;
 	int num2 = end - mid;
-	int *L, *R;
 
-	L = arr_copy(array, start, num1);
-	R = arr_copy(array, mid + 1, num2);
-
+	for (i = 0; i < num1; i++)
+		arr2[i] = array[start + i];
+	for (j = i; j - i < num2; j++)
+		arr2[j] = array[mid + 1 + (j - i)];
 	printf("Merging...\n");
 	printf("[left]: ");
-	print_array(L, num1);
+	print_array(arr2, num1);
 	printf("[right]: ");
-	print_array(R, num2);
-
-	i = 0;
-	j = 0;
-	k = start;
-
-	while (i < num1 && j < num2)
+	print_array(arr2 + i, num2);
+	j = i, i = 0, k = start;
+	while (i < num1 && j - num1 < num2)
 	{
-		if (L[i] <= R[j])
+		if (arr2[i] <= arr2[j])
 		{
-			array[k] = L[i];
+			array[k] = arr2[i];
 			i++;
 		}
 		else
 		{
-			array[k] = R[j];
+			array[k] = arr2[j];
 			j++;
 		}
 		k++;
 	}
-
 	while (i < num1)
 	{
-		array[k] = L[i];
-		i++;
-		k++;
+		array[k] = arr2[i];
+		i++, k++;
 	}
-	while (j < num2)
+	while (j - i < num2)
 	{
-		array[k] = R[j];
-		j++;
-		k++;
+		array[k] = arr2[j];
+		j++, k++;
 	}
 	printf("[Done]: ");
-	print_array(array + start, k - start);
-	free_arr(L);
-	free_arr(R);
+	print_array(array + start, end - start + 1);
 }
 /**
  * split_merge - split array, sort to arr2, and merge to array
@@ -72,45 +61,20 @@ void merge(int *array, int start, int mid, int end)
  *
  * Return: void
  */
-void split_merge(int *array, size_t start, size_t end)
+void split_merge(int *array, int *arr2, size_t start, size_t end)
 {
 	int mid;
 
+	/*printf("Test\n");*/
 	if (start < end)
 	{
-		mid = ((end - 1) + start) / 2;
+		mid = (start + (end - start - 1) / 2);
 
-		split_merge(array, start, mid);
-		split_merge(array, mid + 1, end);
+		split_merge(array, arr2, start, mid);
+		split_merge(array, arr2, mid + 1, end);
 
-		merge(array, start, mid, end);
+		merge(array, arr2, start, mid, end);
 	}
-}
-/**
- * arr_copy - copies an array
- * @array: array to copy
- * @n1: start index
- * @n2: end index
- *
- * Return: new array
- */
-int *arr_copy(int *array, size_t n1, size_t n2)
-{
-	int *ret = malloc(sizeof(int) * n2);
-	size_t i, j;
-
-	for (i = 0, j = n1; i < n2; i++, j++)
-		ret[i] = array[j];
-	return (ret);
-}
-/**
- * free_arr - frees an array
- * @array: array to free
- *
- */
-void free_arr(int *array)
-{
-	free(array);
 }
 /**
  * merge_sort - sorts an array using merge sort algo
@@ -121,5 +85,8 @@ void free_arr(int *array)
  */
 void merge_sort(int *array, size_t size)
 {
-	split_merge(array, 0, size);
+	int *arr2 = malloc(sizeof(int) * size);
+
+	split_merge(array, arr2, 0, size);
+	free(arr2);
 }
