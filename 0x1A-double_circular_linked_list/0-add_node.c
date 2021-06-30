@@ -30,12 +30,11 @@ List *add_node_end(List **list, char *str)
 		(*list)->prev = res;
 	}
 	return (res);
-		
 }
 
 /**
  * add_node_begin - Adds a anode to the beginning of a List
- * list: pointer to head node
+ * @list: pointer to head node
  * @str: String value of new node
  *
  * Return: Address of new node, or nULL
@@ -47,6 +46,11 @@ List *add_node_begin(List **list, char *str)
 
 	if (res == NULL)
 		return (NULL);
+	if (*list == NULL)
+	{
+		*list = res;
+		return (res);
+	}
 	res->next = (*list);
 	if (*list != NULL)
 	{

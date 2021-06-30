@@ -36,6 +36,8 @@ int main(void)
 
     list = NULL;
     add_node_end(&list, "Holberton");
+	printf("One node added to end\n");
+	print_list(list);
     add_node_end(&list, "School");
     add_node_end(&list, "Full");
     add_node_end(&list, "Stack");
@@ -45,6 +47,8 @@ int main(void)
     print_list(list);
     list = NULL;
     add_node_begin(&list, "Holberton");
+	printf("One node added to beginning\n");
+	print_list(list);
     add_node_begin(&list, "School");
     add_node_begin(&list, "Full");
     add_node_begin(&list, "Stack");
