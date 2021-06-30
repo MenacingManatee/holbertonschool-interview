@@ -1,4 +1,5 @@
 #include "list.h"
+#include <stdio.h>
 
 List *create_node(char *str);
 /**
@@ -15,7 +16,7 @@ List *add_node_end(List **list, char *str)
 
 	if (res == NULL)
 		return (NULL);
-	if (*list == NULL)
+	if (list == NULL || *list == NULL)
 	{
 		*list = res;
 		return (res);
@@ -46,7 +47,7 @@ List *add_node_begin(List **list, char *str)
 
 	if (res == NULL)
 		return (NULL);
-	if (*list == NULL)
+	if (list == NULL || *list == NULL)
 	{
 		*list = res;
 		return (res);
@@ -75,7 +76,7 @@ List *create_node(char *str)
 
 	if (res == NULL)
 		return (NULL);
-	res->str = str;
+	res->str = strdup(str);
 	res->next = res;
 	res->prev = res;
 	return (res);
