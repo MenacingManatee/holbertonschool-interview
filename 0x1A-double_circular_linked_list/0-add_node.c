@@ -77,6 +77,11 @@ List *create_node(char *str)
 	if (res == NULL)
 		return (NULL);
 	res->str = strdup(str);
+	if (res->str == NULL)
+	{
+		free(res);
+		return (NULL);
+	}
 	res->next = res;
 	res->prev = res;
 	return (res);
