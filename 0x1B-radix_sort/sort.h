@@ -1,6 +1,7 @@
 #ifndef SORT_H
 #define SORT_H
-#include <stdio.h> /*for size_t and debug prints*/
+#include <stdio.h>
+#include <stdlib.h>
 
 void print_array(const int *array, size_t size);
 
