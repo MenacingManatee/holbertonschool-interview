@@ -48,6 +48,7 @@ void lsd_sort(int *array, size_t size, int mod)
 	for (i = 0; i < (int)size; i++)
 	array[i] = res[i];
 	print_array(array, size);
+	free(res);
 }
 /**
  * radix_sort - sorts an array of integers in ascending order
