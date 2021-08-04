@@ -3,6 +3,7 @@
 Returns a list of lists of integers representing of a pascal triangle
 '''
 
+
 def pascal_triangle(n):
     '''Usage: pascal_triangle(size)'''
     res = []
