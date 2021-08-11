@@ -7,17 +7,16 @@
  *@s2: string 2 to be compared
  * Return: a positive, negative, or 0 number based on the first different char
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
-	while ((*s1 != '\0' && *s2 != '\0') && *s1 == *s2)
-		{
-			s1++;
-			s2++;
-		}
-	if (*s1 == *s2)
+	int i = 0;
+
+	while ((s1[i] != '\0' && s2[i] != '\0') && s1[i] == s2[i])
+			i++;
+	if (s1[i] == s2[i])
 		return (0);
 	else
-		return (*s1 - *s2);
+		return (s1[i] - s2[i]);
 }
 /**
  * regex_match - checks whether a given pattern matches a given string.
@@ -30,7 +29,7 @@ int regex_match(char const *str, char const *pattern)
 {
 	if (str == NULL || pattern == NULL)
 		return (0);
-	if (pattern == "" && str != "")
+	if (_strcmp(pattern, "") == 0 && _strcmp(str, "") != 0)
 		return (0);
 	if (_strcmp(pattern, ".*") == 0)
 		return (1);
