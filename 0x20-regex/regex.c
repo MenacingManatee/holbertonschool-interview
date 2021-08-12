@@ -57,17 +57,24 @@ int contains(const char *s, char c)
  */
 int regex_match(char const *str, char const *pattern)
 {
-	if (str == NULL || pattern == NULL)
+	if (str == NULL || pattern == NULL) /* Basic NULL check*/
 		return (0);
-	if (_strcmp(pattern, "") == 0 && _strcmp(str, "") != 0)
-		return (0);
-	if (_strcmp(pattern, ".*") == 0)
+	if (_strcmp(str, pattern) == 0) /* If the pattern is an exact match */
 		return (1);
-	if (_strcmp(str, "") == 0 && _strlen(pattern) != 2)
+	if (_strcmp(pattern, "") == 0 && _strcmp(str, "") != 0) /* If pattern is ""
+															 *  the str must be too
+															 */
 		return (0);
-	if (_strlen(pattern) == 1 && _strlen(str) > 1)
+	if (_strcmp(pattern, ".*") == 0) /* if the pattern matches everything*/
+		return (1);
+	if (_strcmp(str, "") == 0 && _strlen(pattern) != 2) /* If str is empty, pat
+														 * must be a series of any character
+														 * followed by a *.
+														 * TODO: Make this check better
+														 */
 		return (0);
 	if ((!contains(pattern, '*')) && (_strlen(str) != _strlen(pattern)))
+		/* Length is only changed by '*' character */
 		return (0);
 	return (1);
 }
