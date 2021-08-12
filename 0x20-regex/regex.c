@@ -67,8 +67,7 @@ int regex_match(char const *str, char const *pattern)
 		return (0);
 	if (_strlen(pattern) == 1 && _strlen(str) > 1)
 		return (0);
-	if ((!contains(pattern, '*') && !contains(pattern, '.')) &&
-		(_strlen(str) != _strlen(pattern)))
+	if ((!contains(pattern, '*')) && (_strlen(str) != _strlen(pattern)))
 		return (0);
 	return (1);
 }
