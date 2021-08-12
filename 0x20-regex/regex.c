@@ -47,7 +47,9 @@ int regex_match(char const *str, char const *pattern)
 		return (0);
 	if (_strcmp(pattern, ".*") == 0)
 		return (1);
-	if (_strcmp(str, "") == 0 && (_strlen(pattern) == 2 && pattern[1] == '*'))
-		return (1);
+	if (_strcmp(str, "") == 0 && _strlen(pattern) != 2)
+		return (0);
+	if (_strlen(pattern) == 1 && _strlen(str) > 1)
+		return (0);
 	return (1);
 }
