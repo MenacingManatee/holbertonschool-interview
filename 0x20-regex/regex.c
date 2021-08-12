@@ -33,6 +33,22 @@ int _strlen(const char *s)
 	return (i);
 }
 /**
+ * contains - checks if a string contains a specific character
+ * @s: string to check
+ * @c: character to check for
+ *
+ * Return: 0 if it does not contain the character, 1 if it does
+ */
+int contains(const char *s, char c)
+{
+	int flag = 0, i = 0;
+
+	while (s[i])
+		if (s[i++] == c)
+			flag = 1;
+	return (flag);
+}
+/**
  * regex_match - checks whether a given pattern matches a given string.
  * @str: the string to scan
  * @pattern: the regular expression
@@ -50,6 +66,8 @@ int regex_match(char const *str, char const *pattern)
 	if (_strcmp(str, "") == 0 && _strlen(pattern) != 2)
 		return (0);
 	if (_strlen(pattern) == 1 && _strlen(str) > 1)
+		return (0);
+	if ((!contains(pattern, '*') && !contains(pattern, '.')) && (_strlen(str) != _strlen(pattern)))
 		return (0);
 	return (1);
 }
