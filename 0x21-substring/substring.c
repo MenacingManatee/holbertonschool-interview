@@ -16,19 +16,24 @@ int check_match(const char *s, const char **words, int nb_words);
 int *find_substring(char const *s, char const **words, int nb_words, int *n)
 {
 	int *res;
-	int i;
+	int i, num;
 
-	*n = 0; /*I can start undefined, this initializes to 0*/
+	*n = 0; /*n can start undefined, this initializes to 0*/
 
 	if (!s || !words || !*words || nb_words == 0)
 		return (NULL); /*Edge case check*/
 	res = malloc(sizeof(int) * _strlen(s)); /*max size possible*/
 	if (!res)
 		return (NULL);
+	for (i = 0, num = 0; i < nb_words; i++)
+		num += _strlen(words[i]);
 	for (i = 0; s[i] != '\0'; i++)
 	{
 		if (check_match(s + i, words, nb_words))
+		{
 			res[(*n)++] = i;
+			i += num + 1;
+		}
 	}
 	if (*n == 0)
 	{
@@ -61,31 +66,40 @@ int _strlen(const char *s)
 int check_match(const char *s, const char **words, int nb_words)
 {
 	int *skip;
-	int i, j, match = 1, flag = 0;
+	int i, j, k, match = 1, flag, flag2 = 1;
 
 	skip = malloc(sizeof(int) * nb_words);
 	for (i = 0; i < nb_words; i++)
 		skip[i] = 0;
-	for (i = 0; i < nb_words; i++)
+	for (i = 0; s[i]; i++)
 	{
+		flag = 0;
+		flag2 = 1;
+		for (k = 0; k < nb_words; k++)
+			if (skip[k] == 0)
+				flag2 = 0;
+		if (flag2 == 1)
+			break;
 		for (j = 0; j < nb_words; j++)
 		{
-			flag = 0;
 			if (skip[j])
 				continue;
 			if (!_strncmp(s + i, words[j], _strlen(words[j])))
 			{
 				skip[j] = 1;
-				i += _strlen(words[j]) - 1;
+				i += _strlen(words[j]);
 				flag = 1;
 			}
 		}
-		if (flag == 0)
+		if (!flag && s[i] != '\0')
 		{
 			match = 0;
 			break;
 		}
 	}
+	for (i = 0; i < nb_words; i++)
+		if (skip[i] != 1)
+			match = 0;
 	free(skip);
 	return (match);
 }
