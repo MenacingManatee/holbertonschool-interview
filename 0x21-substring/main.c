@@ -24,6 +24,7 @@ int main(int ac, char const **av)
 
     indices = find_substring(s, words, nb_words, &n);
 
+	printf("n = %d\n", n);
     printf("Indices -> [");
     for (i = 0; i < n; i++)
 		{
