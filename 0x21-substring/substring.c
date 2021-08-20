@@ -86,6 +86,7 @@ int check_match(const char *s, const char **words, int nb_words)
 			break;
 		}
 	}
+	free(skip);
 	return (match);
 }
 /**
