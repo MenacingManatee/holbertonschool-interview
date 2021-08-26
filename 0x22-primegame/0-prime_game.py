@@ -8,6 +8,8 @@ def isWinner(x, nums):
     Return: name of the player that won the most rounds
     '''
     count = 0
+    if x <= 0 or nums == None or nums == []:
+        return None
     for num in nums.copy():
         if x <= 0:
             return "Ben" if count % 2 == 0 else "Maria"
@@ -16,8 +18,11 @@ def isWinner(x, nums):
         if isPrime(num):
             nums.remove(num)
             for i in nums:
-                if num % i == 0:
+                if num % i == 0 and num != i:
                     nums.remove(i)
+        count += 1
+    if count == 0:
+        return 0
     return "Ben" if count % 2 == 0 else "Maria"
 
 
@@ -26,7 +31,7 @@ def isPrime(num):
     if num < 2:
         return 0
     if num % 2 == 0:
-        return 0
+        return 0 if num is not 2 else 1
     for i in range(3, num // 2, 2):
         if i ** 2 > num:
             return 1
