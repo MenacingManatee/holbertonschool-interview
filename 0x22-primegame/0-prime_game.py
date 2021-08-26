@@ -7,23 +7,31 @@ def isWinner(x, nums):
     Usage: isWinner(rounds, numarray)
     Return: name of the player that won the most rounds
     '''
-    count = 0
     if x <= 0 or nums == None or nums == []:
         return None
-    for num in nums.copy():
-        if x <= 0:
-            return "Ben" if count % 2 == 0 else "Maria"
-        elif num not in nums:
-            continue
-        if isPrime(num):
-            nums.remove(num)
-            for i in nums:
-                if num % i == 0 and num != i:
-                    nums.remove(i)
-        count += 1
-    if count == 0:
-        return 0
-    return "Ben" if count % 2 == 0 else "Maria"
+    ben, maria = 0, 0
+    for num in nums:
+        count = 0
+        rnd = [i for i in range(1, num + 1)]
+        for i in rnd.copy():
+            if i not in rnd:
+                continue
+            if isPrime(i):
+                rnd.remove(i)
+                for j in rnd:
+                    if j > 1 and j % i == 0 and i != j:
+                        rnd.remove(j)
+            count += 1
+        if count % 2 == 1:
+            ben += 1
+        else:
+            maria += 1
+    if maria > ben:
+        return "Maria"
+    elif ben > maria:
+        return "Ben"
+    else:
+        return None
 
 
 def isPrime(num):
