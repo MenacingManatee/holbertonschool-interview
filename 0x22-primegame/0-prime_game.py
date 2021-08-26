@@ -7,7 +7,7 @@ def isWinner(x, nums):
     Usage: isWinner(rounds, numarray)
     Return: name of the player that won the most rounds
     '''
-    if x <= 0 or nums == None or nums == []:
+    if x <= 0 or nums is None or nums == []:
         return None
     ben, maria = 0, 0
     for num in nums:
